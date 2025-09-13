@@ -697,11 +697,20 @@
             });
         });
 
-        // Enhanced draggable functionality with better mobile support
+        // Enhanced draggable functionality with fixed layering
         let isDragging = false;
         let currentElement = null;
         let offsetX = 0;
         let offsetY = 0;
+        let originalZIndex = '';
+
+        // Store original z-index values for each image
+        const originalZIndexes = {
+            'image1': 4,
+            'image2': 3,
+            'image3': 2,
+            'image4': 1
+        };
 
         document.querySelectorAll('.draggable-image').forEach(img => {
             img.addEventListener('mousedown', startDrag);
@@ -717,8 +726,13 @@
             isDragging = true;
             currentElement = e.target.closest('.draggable-image');
             
-            // Bring to front
-            currentElement.style.zIndex = '1000';
+            // Store original z-index and only bring to front if it's not image4
+            originalZIndex = currentElement.style.zIndex || originalZIndexes[currentElement.id];
+            
+            // Only bring to front if it's not image4 (which should stay at the back)
+            if (currentElement.id !== 'image4') {
+                currentElement.style.zIndex = '1000';
+            }
             
             const rect = currentElement.getBoundingClientRect();
             const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
@@ -757,13 +771,17 @@
 
         function stopDrag() {
             if (currentElement) {
-                // Reset z-index after a delay to maintain original layering
-                setTimeout(() => {
-                    currentElement.style.zIndex = '';
-                }, 100);
+                // Restore original z-index after a delay, but only if it's not image4
+                if (currentElement.id !== 'image4') {
+                    setTimeout(() => {
+                        currentElement.style.zIndex = originalZIndex;
+                    }, 100);
+                }
+                // Image4 keeps its original z-index (1) to stay at the back
             }
             isDragging = false;
             currentElement = null;
+            originalZIndex = '';
         }
 
         // Prevent zoom on double tap for iOS
