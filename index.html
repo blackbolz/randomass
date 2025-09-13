@@ -24,6 +24,84 @@
             align-items: center;
         }
 
+        /* Volume Control Styles */
+        .volume-control {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            padding: 10px 15px;
+            border: 4px solid #000;
+            border-radius: 15px;
+            box-shadow: 
+                4px 4px 0px #000,
+                8px 8px 0px rgba(0,0,0,0.3);
+        }
+
+        .volume-control::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 8px;
+            right: 8px;
+            height: 6px;
+            background: linear-gradient(to right, rgba(255,255,255,0.6) 0%, transparent 100%);
+            border-radius: 3px;
+        }
+
+        .volume-icon {
+            color: white;
+            font-size: 12px;
+            text-shadow: 2px 2px 0px #000;
+            min-width: 20px;
+        }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100px;
+            height: 8px;
+            background: #333;
+            border: 2px solid #000;
+            border-radius: 5px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #FFD93D 0%, #FF6B35 100%);
+            border: 3px solid #000;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, #FFD93D 0%, #FF6B35 100%);
+            border: 3px solid #000;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px #000;
+        }
+
+        .volume-percentage {
+            color: white;
+            font-size: 10px;
+            text-shadow: 2px 2px 0px #000;
+            min-width: 30px;
+            text-align: center;
+        }
+
         .title {
             font-size: clamp(16px, 4vw, 24px);
             color: #FF6B35;
@@ -325,11 +403,29 @@
             body {
                 padding: 10px;
             }
-            
+
+            .volume-control {
+                top: 10px;
+                left: 10px;
+                padding: 8px 12px;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .volume-slider {
+                width: 80px;
+            }
+
+            .volume-icon,
+            .volume-percentage {
+                font-size: 10px;
+            }
+
             .ca-container {
                 flex-direction: column;
                 gap: 10px;
                 margin-bottom: 25px;
+                max-width: 500px; /* Keep original mobile width */
             }
             
             .ca-box {
@@ -346,6 +442,11 @@
             .social-buttons {
                 gap: 12px;
                 margin-bottom: 25px;
+            }
+
+            .social-btn img {
+                width: 30px;
+                height: 30px;
             }
             
             .drag-container {
@@ -415,6 +516,19 @@
     </style>
 </head>
 <body>
+    <!-- Volume Control -->
+    <div class="volume-control">
+        <div class="volume-icon">♪</div>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+        <div class="volume-percentage" id="volumePercentage">50%</div>
+    </div>
+
+    <!-- Background Audio -->
+    <audio id="backgroundMusic" loop preload="auto">
+        <source src="images/sound.mp4" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+
     <div class="floating-elements">
         <div class="coin"></div>
         <div class="coin"></div>
@@ -472,8 +586,58 @@
     </div>
 
     <script>
+        // Background music functionality
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumePercentage = document.getElementById('volumePercentage');
+
+        // Set initial volume
+        backgroundMusic.volume = 0.5;
+
+        // Auto-play music (with user interaction fallback)
+        function playMusic() {
+            backgroundMusic.play().catch(e => {
+                console.log('Autoplay prevented. Music will start on first user interaction.');
+                // Add event listener for first user interaction
+                document.addEventListener('click', function() {
+                    backgroundMusic.play();
+                }, { once: true });
+            });
+        }
+
+        // Volume control
+        volumeSlider.addEventListener('input', function() {
+            const volume = this.value / 100;
+            backgroundMusic.volume = volume;
+            volumePercentage.textContent = this.value + '%';
+            
+            // Update volume icon based on level
+            const volumeIcon = document.querySelector('.volume-icon');
+            if (volume === 0) {
+                volumeIcon.textContent = '🔇';
+            } else if (volume < 0.3) {
+                volumeIcon.textContent = '🔈';
+            } else if (volume < 0.7) {
+                volumeIcon.textContent = '🔉';
+            } else {
+                volumeIcon.textContent = '🔊';
+            }
+        });
+
+        // Start music when page loads
+        window.addEventListener('load', playMusic);
+
+        // Retry music play on any user interaction if it failed initially
+        document.addEventListener('click', function() {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play().catch(e => {
+                    console.log('Music play failed:', e);
+                });
+            }
+        }, { once: true });
+
         function copyCA() {
-            const textToCopy = "coming soon";
+            const textToCopy = "7zA9A9aD9rmdu629bbEp9TCZp5E3p6vdYtcUmBLspump";
             const copyBtn = document.getElementById('copyBtn');
             
             // Use the modern Clipboard API
