@@ -18,27 +18,29 @@
             font-family: 'Press Start 2P', Arial, sans-serif;
             background: linear-gradient(45deg, #87CEEB 0%, #98FB98 50%, #F0E68C 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .title {
-            font-size: 24px;
+            font-size: clamp(16px, 4vw, 24px);
             color: #FF6B35;
             text-shadow: 4px 4px 0px #000, -2px -2px 0px #FFF;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             text-align: center;
+            line-height: 1.3;
+            word-break: break-word;
         }
 
         .token-image {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .token-image img {
-            width: 200px;
-            height: 200px;
+            width: clamp(120px, 30vw, 200px);
+            height: clamp(120px, 30vw, 200px);
             object-fit: contain;
             border: 6px solid #000;
             border-radius: 20px;
@@ -53,22 +55,30 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 500px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .ca-box {
             background: linear-gradient(45deg, #FF6B6B 0%, #FF8E53 50%, #FF6B35 100%);
             color: white;
-            padding: 20px 30px;
+            padding: 15px 20px;
             border: 5px solid #000;
-            border-radius: 25px;
-            font-size: 14px;
+            border-radius: 20px;
+            font-size: clamp(10px, 2.5vw, 14px);
             font-weight: bold;
             text-shadow: 2px 2px 0px #000;
             box-shadow: 
-                6px 6px 0px #000,
-                12px 12px 0px rgba(0,0,0,0.3);
+                4px 4px 0px #000,
+                8px 8px 0px rgba(0,0,0,0.3);
             position: relative;
+            flex: 1;
+            min-width: 0;
+            word-break: break-all;
+            text-align: center;
         }
 
         .ca-box::before {
@@ -77,27 +87,28 @@
             top: 5px;
             left: 10px;
             right: 10px;
-            height: 8px;
+            height: 6px;
             background: linear-gradient(to right, rgba(255,255,255,0.6) 0%, transparent 100%);
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         .copy-btn {
             background: linear-gradient(45deg, #4ECDC4 0%, #44A08D 100%);
             color: white;
             border: 5px solid #000;
-            padding: 20px 25px;
-            border-radius: 25px;
+            padding: 15px 20px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: clamp(10px, 2.5vw, 12px);
             font-weight: bold;
             text-shadow: 2px 2px 0px #000;
             font-family: 'Press Start 2P', Arial, sans-serif;
             transition: all 0.2s ease;
             box-shadow: 
-                6px 6px 0px #000,
-                12px 12px 0px rgba(0,0,0,0.3);
+                4px 4px 0px #000,
+                8px 8px 0px rgba(0,0,0,0.3);
             position: relative;
+            white-space: nowrap;
         }
 
         .copy-btn::before {
@@ -106,16 +117,16 @@
             top: 5px;
             left: 10px;
             right: 10px;
-            height: 8px;
+            height: 6px;
             background: linear-gradient(to right, rgba(255,255,255,0.6) 0%, transparent 100%);
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         .copy-btn:hover {
             transform: translate(-2px, -2px);
             box-shadow: 
-                8px 8px 0px #000,
-                14px 14px 0px rgba(0,0,0,0.3);
+                6px 6px 0px #000,
+                10px 10px 0px rgba(0,0,0,0.3);
         }
 
         .copy-btn:active {
@@ -131,46 +142,48 @@
 
         .social-buttons {
             display: flex;
-            gap: 25px;
-            margin-bottom: 40px;
+            gap: 15px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
             justify-content: center;
+            width: 100%;
+            max-width: 400px;
         }
 
         .social-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 80px;
-            height: 80px;
-            border: 5px solid #000;
-            border-radius: 25px;
+            width: clamp(60px, 15vw, 80px);
+            height: clamp(60px, 15vw, 80px);
+            border: 4px solid #000;
+            border-radius: 20px;
             background: linear-gradient(45deg, #667eea 0%, #764ba2 50%, #667eea 100%);
             cursor: pointer;
             transition: all 0.2s ease;
             text-decoration: none;
             box-shadow: 
-                6px 6px 0px #000,
-                12px 12px 0px rgba(0,0,0,0.3);
+                4px 4px 0px #000,
+                8px 8px 0px rgba(0,0,0,0.3);
             position: relative;
         }
 
         .social-btn::before {
             content: '';
             position: absolute;
-            top: 8px;
-            left: 12px;
-            right: 12px;
-            height: 12px;
+            top: 6px;
+            left: 8px;
+            right: 8px;
+            height: 8px;
             background: linear-gradient(to right, rgba(255,255,255,0.6) 0%, transparent 100%);
-            border-radius: 6px;
+            border-radius: 4px;
         }
 
         .social-btn:hover {
-            transform: translate(-3px, -3px);
+            transform: translate(-2px, -2px);
             box-shadow: 
-                9px 9px 0px #000,
-                15px 15px 0px rgba(0,0,0,0.3);
+                6px 6px 0px #000,
+                10px 10px 0px rgba(0,0,0,0.3);
         }
 
         .social-btn:active {
@@ -181,8 +194,8 @@
         }
 
         .social-btn img {
-            width: 40px;
-            height: 40px;
+            width: clamp(25px, 8vw, 40px);
+            height: clamp(25px, 8vw, 40px);
             object-fit: contain;
             filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.5));
         }
@@ -191,7 +204,7 @@
             position: relative;
             width: 100%;
             max-width: 600px;
-            height: 400px;
+            height: clamp(250px, 50vw, 400px);
             background: linear-gradient(45deg, #FFF 0%, #F8F8FF 100%);
             border: 5px solid #000;
             border-radius: 25px;
@@ -215,8 +228,6 @@
 
         .draggable-image {
             position: absolute;
-            width: 80px;
-            height: 80px;
             cursor: grab;
             user-select: none;
             transition: transform 0.1s ease;
@@ -235,37 +246,36 @@
         }
 
         #image1 {
-            top: 50px;
-            left: 50px;
+            top: clamp(20px, 8vw, 50px);
+            left: clamp(20px, 8vw, 50px);
             z-index: 4;
-            width: 235px;        /* ← CHANGE THIS FOR IMAGE 1 ONLY */
-            height: 235px;
+            width: clamp(120px, 35vw, 235px);
+            height: clamp(120px, 35vw, 235px);
         }
 
         #image2 {
-            top: 100px;
-            left: 150px;
+            top: clamp(40px, 15vw, 100px);
+            left: clamp(60px, 20vw, 150px);
             z-index: 3;
-            width: 140px;        /* ← CHANGE THIS FOR IMAGE 1 ONLY */
-            height: 140px;
-            
+            width: clamp(70px, 20vw, 140px);
+            height: clamp(70px, 20vw, 140px);
         }
 
         #image3 {
-            top: 150px;
-            left: 250px;
+            top: clamp(60px, 25vw, 150px);
+            left: clamp(100px, 35vw, 250px);
             z-index: 2;
-        
-        }
-        #image4 {
-            top: 150px;
-            left: 250px;
-            z-index: 1;
-            width: 240px;        /* ← CHANGE THIS FOR IMAGE 1 ONLY */
-            height: 240px;
-        
+            width: clamp(50px, 15vw, 80px);
+            height: clamp(50px, 15vw, 80px);
         }
 
+        #image4 {
+            top: clamp(60px, 25vw, 150px);
+            left: clamp(100px, 35vw, 250px);
+            z-index: 1;
+            width: clamp(120px, 35vw, 240px);
+            height: clamp(120px, 35vw, 240px);
+        }
 
         .floating-elements {
             position: fixed;
@@ -279,8 +289,8 @@
 
         .coin {
             position: absolute;
-            width: 40px;
-            height: 40px;
+            width: clamp(20px, 6vw, 40px);
+            height: clamp(20px, 6vw, 40px);
             background: radial-gradient(circle, #FFD700 0%, #FFA500 100%);
             border: 3px solid #000;
             border-radius: 50%;
@@ -293,7 +303,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 14px;
+            font-size: clamp(8px, 3vw, 14px);
             font-weight: bold;
             color: #000;
         }
@@ -305,60 +315,101 @@
 
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(90deg); }
-            50% { transform: translateY(-40px) rotate(180deg); }
-            75% { transform: translateY(-20px) rotate(270deg); }
+            25% { transform: translateY(-15px) rotate(90deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+            75% { transform: translateY(-15px) rotate(270deg); }
         }
 
-        @media (max-width: 600px) {
-            .title {
-                font-size: 18px;
-                margin-bottom: 20px;
-            }
-            
-            .token-image img {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .social-buttons {
-                gap: 15px;
-            }
-            
-            .social-btn {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .social-btn img {
-                width: 35px;
-                height: 35px;
+        /* Mobile-specific adjustments */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
             }
             
             .ca-container {
                 flex-direction: column;
-                gap: 15px;
+                gap: 10px;
+                margin-bottom: 25px;
+            }
+            
+            .ca-box {
+                width: 100%;
+                padding: 12px 15px;
+                font-size: 10px;
+            }
+            
+            .copy-btn {
+                width: 100%;
+                padding: 12px 15px;
+            }
+            
+            .social-buttons {
+                gap: 12px;
+                margin-bottom: 25px;
             }
             
             .drag-container {
-                height: 300px;
+                height: 250px;
+                margin-bottom: 20px;
+            }
+            
+            #image1 {
+                width: 100px;
+                height: 100px;
+                top: 20px;
+                left: 20px;
+            }
+            
+            #image2 {
+                width: 60px;
+                height: 60px;
+                top: 40px;
+                left: 80px;
+            }
+            
+            #image3 {
+                width: 40px;
+                height: 40px;
+                top: 80px;
+                left: 120px;
+            }
+            
+            #image4 {
+                width: 100px;
+                height: 100px;
+                top: 80px;
+                left: 120px;
+            }
+        }
+
+        /* Tablet adjustments */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .ca-container {
+                gap: 12px;
+            }
+            
+            .social-buttons {
+                gap: 18px;
+            }
+            
+            .drag-container {
+                height: 350px;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .social-btn, .copy-btn {
+                min-height: 44px;
+                min-width: 44px;
             }
             
             .draggable-image {
-                width: 126px;
-                height: 126px;
+                cursor: pointer;
             }
-
-            .social-btn img {
-                width: 45px;
-                height: 45px;
-            }
-
-            /* Keep twitter and dex icons slightly larger on mobile too */
-            .social-btn:nth-child(1) img,
-            .social-btn:nth-child(2) img {
-                width: 50px;
-                height: 50px;
+            
+            .draggable-image:active {
+                transform: scale(1.1);
             }
         }
     </style>
@@ -482,7 +533,7 @@
             });
         });
 
-        // Draggable functionality
+        // Enhanced draggable functionality with better mobile support
         let isDragging = false;
         let currentElement = null;
         let offsetX = 0;
@@ -501,6 +552,9 @@
         function startDrag(e) {
             isDragging = true;
             currentElement = e.target.closest('.draggable-image');
+            
+            // Bring to front
+            currentElement.style.zIndex = '1000';
             
             const rect = currentElement.getBoundingClientRect();
             const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
@@ -538,9 +592,25 @@
         }
 
         function stopDrag() {
+            if (currentElement) {
+                // Reset z-index after a delay to maintain original layering
+                setTimeout(() => {
+                    currentElement.style.zIndex = '';
+                }, 100);
+            }
             isDragging = false;
             currentElement = null;
         }
+
+        // Prevent zoom on double tap for iOS
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
     </script>
 </body>
 </html>
